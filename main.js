@@ -11,7 +11,7 @@ function flipCoin() {
         return
     }
 
-    fetch(`/api?choice=${choice}`)
+    fetch('/api?choice=' + choice))
         .then(response => {
             if (!response.ok) {
                 throw new Error('Coin flip failed')
