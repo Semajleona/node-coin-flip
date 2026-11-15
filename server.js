@@ -1,117 +1,96 @@
+
 const http = require('http')
-const fs = require('fs') // where the server talks to the browser
+const fs = require('fs')
+const path = require('path')
 const url = require('url')
-const querystring = require('querystring')
 const figlet = require('figlet')
 
-const server = http.createServer(function (req, res) { // creates the server, sends requets to the broswer and responds to what the server sent back 
+const server = http.createServer(function(req, res) {
 
-  const page = url.parse(req.url).pathname // this gets the page and forms the path being requested in url
-  const params = querystring.parse(url.parse(req.url).query)// the acutal info the broswer sent so in my game when i type heads the api changes to ${'choice} = heads
+    const parsedUrl = url.parse(req.url, true)
+    const page = parsedUrl.pathname
+    const params = parsedUrl.query
 
-  console.log(page)
+    if (page === '/') {
 
-  if (page == '/') {
+        serveFile('index.html', 'text/html', res)
 
-    fs.readFile('index.html', function (err, data) {
-      res.writeHead(200, { 'Content-Type': 'text/html' })
-      res.write(data)
-      res.end()
-    })
+    } else if (page === '/api') {
 
-  }
+        const choice = String(params.choice || '').toLowerCase()
 
-  else if (page == '/api') {
+        if (choice !== 'heads' && choice !== 'tails') {
+            res.writeHead(400, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ error: 'Choose heads or tails' }))
+            return
+        }
 
-    let coinflip = ['heads', 'tails']
-    let winOrLose = ''
+        const coinflip = ['heads', 'tails']
 
-    if ('choice' in params) {
+        const randomFlip = coinflip[Math.floor(Math.random() * 2)]
 
-      console.log(params['choice'])
+        let winOrLose = ''
 
-      let randomFlip = coinflip[Math.floor(Math.random() * 2)]
+        if (choice === randomFlip) {
+            winOrLose = 'You Win!'
+        } else {
+            winOrLose = 'You Lost!'
+        }
 
-      if (params['choice'] == randomFlip) {
-        winOrLose = 'You Win'
-      }
+        const objToJson = {
+            myChoice: choice,
+            theFlip: `The flip was ${randomFlip}`,
+            flipResult: winOrLose
+        }
 
-      else {
-        winOrLose = 'You Lost'
-      }
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(objToJson))
 
-      console.log(randomFlip)
+    } else if (page === '/css/style.css') {
 
-      res.writeHead(200, { 'Content-Type': 'application/json' })
+        serveFile('css/style.css', 'text/css', res)
 
-      const objToJson = {
-        myChoice: params['choice'],
-        theFlip: `The flip was ${randomFlip}`,
-        flipResult: winOrLose
-      }
+    } else if (page === '/js/main.js') {
 
-      res.end(JSON.stringify(objToJson)) // this is actually sending the coin flip result back to the front end 
+        serveFile('js/main.js', 'text/javascript', res)
+
+    } else if (page === '/allison-saeng-ZWiaGCFcfJ0-unsplash.jpg') {
+
+        serveFile('allison-saeng-ZWiaGCFcfJ0-unsplash.jpg', 'image/jpeg', res)
+
+    } else {
+
+        figlet('404!!', function(err, data) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' })
+            res.end(err ? 'Page not found' : data)
+        })
+
     }
-
-  }
-
-  else if (page == '/css/style.css') {
-
-    fs.readFile('css/style.css', function (err, data) {
-      res.writeHead(200, { 'Content-Type': 'text/css' })
-      res.write(data)
-      res.end()
-    })
-
-  }
-
-  else if (page == '/js/main.js') {
-
-    fs.readFile('js/main.js', function (err, data) {
-      res.writeHead(200, { 'Content-Type': 'text/javascript' })
-      res.write(data)
-      res.end()
-    })
-
-  }
-
-
-
-  else if (page == '/allison-saeng-ZWiaGCFcfJ0-unsplash.jpg') {
-    fs.readFile('allison-saeng-ZWiaGCFcfJ0-unsplash.jpg', function (err, data) {
-      res.writeHead(200, { 'Content-Type': 'image/jpeg' })
-      res.write(data)
-      res.end()
-    })
-
-  }
-
-
-
-
-
-  else {
-
-    figlet('404!!', function (err, data) {
-
-      if (err) {
-        console.log('Something went wrong...')
-        console.dir(err)
-        return
-      }
-
-      res.write(data)
-      res.end()
-
-    })
-
-  }
 
 })
 
+function serveFile(fileName, contentType, res) {
+
+    const filePath = path.join(__dirname, fileName)
+
+    fs.readFile(filePath, function(err, data) {
+
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' })
+            res.end('File not found')
+            return
+        }
+
+        res.writeHead(200, { 'Content-Type': contentType })
+        res.end(data)
+
+    })
+
+}
 
 const PORT = process.env.PORT || 8000
 
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Coin Toss server running on port ${PORT}`)
 })
+
