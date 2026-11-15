@@ -1,0 +1,29 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+h1 {
+  color: rgba(95, 54, 1, 0.887);
+}
+
+img {
+  height: 200px;
+  width: 400px;
+}
+
+input {
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 120px;
+  color: green;
+}
