@@ -1,18 +1,36 @@
-document.querySelector('#flip').addEventListener('click', makeReq)
 
-function makeReq() {
+document.querySelector('#flip').addEventListener('click', flipCoin)
 
-  const myFlip = document.querySelector("#game").value
+function flipCoin() {
 
-  fetch(`/api?choice=${myFlip}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      document.querySelector("h2").innerText = data.theFlip
-      document.querySelector("h3").innerText = data.flipResult
+    const choice = document.querySelector('#game').value.trim().toLowerCase()
 
-    })
+    if (choice !== 'heads' && choice !== 'tails') {
+        document.querySelector('#coinResult').textContent = 'Please enter heads or tails'
+        document.querySelector('#gameResult').textContent = ''
+        return
+    }
 
+    fetch(`/api?choice=${choice}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Coin flip failed')
+            }
+            return response.json()
+        })
+        .then(data => {
+
+            document.querySelector('#coinResult').textContent = data.theFlip
+
+            document.querySelector('#gameResult').textContent = data.flipResult
+
+        })
+        .catch(error => {
+            console.error(error)
+            document.querySelector('#coinResult').textContent = 'Something went wrong. Try again.'
+            document.querySelector('#gameResult').textContent = ''
+        })
 
 }
+
 
