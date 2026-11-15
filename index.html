@@ -1,20 +1,43 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Toss Game</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <h1>Coin Toss!</h1>
-  <img src="allison-saeng-ZWiaGCFcfJ0-unsplash.jpg">
-  <input id="game" type="text">
-  <button id="flip" type="button" name="button">Flip The Coin</button>
-  <h2></h2>
-  <h3></h3>
-  <script src="js/main.js"></script>
-</body>
 
+    <main>
+        <h1>Coin Toss!</h1>
+
+        <img
+            src="/allison-saeng-ZWiaGCFcfJ0-unsplash.jpg"
+            alt="Gold coins"
+            width="350"
+        >
+
+        <h2>Choose Heads or Tails</h2>
+
+        <input
+            id="game"
+            type="text"
+            placeholder="Enter heads or tails"
+        >
+
+        <button id="flip" type="button">
+            Flip The Coin
+        </button>
+
+        <h2 id="coinResult"></h2>
+        <h3 id="gameResult"></h3>
+
+    </main>
+
+    <script src="/js/main.js"></script>
+
+</body>
 </html>
