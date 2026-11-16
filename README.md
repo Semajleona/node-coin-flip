@@ -1,89 +1,82 @@
-🪙 Coin Toss Game
+<img width="889" height="592" alt="Screenshot 2026-11-16 at 8 07 46 AM" src="https://github.com/user-attachments/assets/3333635b-6748-463f-9dd0-eec80d9e7e38" />
+https://node-coin-flip-liso.onrender.com
 
+# 🪙 Coin Toss Game
 
+## 📌 Project Description
 
+Coin Toss Game is an interactive full-stack web application where users guess Heads or Tails and compete against a randomly generated coin toss. The application uses a Node.js backend to process the player's selection, determine the outcome, and return the results to the frontend.
 
+## ✨ Features
 
+- Choose between Heads or Tails.
+- Generate a random coin toss using the server.
+- Display whether the player wins or loses.
+- Use JavaScript `fetch()` to communicate with the backend.
+- Play multiple rounds without restarting the application.
+- Simple, user-friendly interface.
 
-<img width="1042" height="692" alt="Screenshot 2026-10-06 at 7 52 24 PM" src="https://github.com/user-attachments/assets/c3fde04a-0298-491b-ad06-6a6d9e664935" />
-Project Description
+## 🛠️ Tech Stack
 
-The Coin Toss Game is a simple interactive web application where the player chooses either Heads or Tails and tries to guess the result of a randomly generated coin toss.
+- **HTML5:** Structures the game interface.
+- **CSS3:** Styles the webpage and game elements.
+- **JavaScript:** Handles user interactions, API requests, and displaying results.
+- **Node.js:** Runs the backend server and processes game logic.
+- **Fetch API:** Sends requests between the frontend and backend.
+- **JSON:** Transfers game results from the server to the browser.
 
-The player's choice is sent to a Node.js server. The server randomly generates Heads or Tails, compares the result to the player's choice, and sends back whether the player won or lost.
+## 📚 What I Learned
 
-🎮 How to Play
+Through this project, I gained hands-on experience with:
 
-Open the Coin Toss Game.
+- Building a simple full-stack application using JavaScript and Node.js.
+- Creating server-side logic to generate random outcomes.
+- Using `fetch()` to send requests and receive responses.
+- Working with JSON data between the frontend and backend.
+- Updating webpage content dynamically based on server responses.
+- Connecting frontend interactions with backend functionality.
 
-Choose Heads or Tails.
+## 💻 Installation
 
-Click the button to make your choice.
+**1. Clone the repository**
 
-The computer randomly generates Heads or Tails.
+```bash
+git clone https://github.com/Semajleona/node-coin-flip.git
+```
 
-If your choice matches the coin toss, you win!
+**2. Navigate to the project folder**
 
-If your choice does not match the coin toss, you lose!
+```bash
+cd node-coin-flip
+```
 
-Play again and try your luck!
+**3. Install dependencies**
 
-🛠️ Tech Stack
-
-HTML
-
-HTML creates the structure of the game, including the input, button, and area where the game results are displayed.
-
-CSS
-
-CSS styles the game and controls the appearance of the webpage.
-
-JavaScript
-
-JavaScript handles the player's interaction with the game. It gets the player's choice, uses fetch() to communicate with the server, and displays the results on the webpage.
-
-Node.js
-
-Node.js runs the backend server. The server receives the player's choice, randomly generates Heads or Tails, determines whether the player won or lost, and sends the result back to the frontend as JSON.
-
-💻 Download and Run on Your Machine
-
-1. Clone the Repository
-
-Copy the repository to your computer using:
-
-git clone YOUR-GITHUB-REPOSITORY-LINK
-
-2. Open the Project Folder
-
-Move into the project folder:
-
-cd YOUR-PROJECT-FOLDER
-
-3. Install Dependencies
-
-Run:
-
+```bash
 npm install
+```
 
-If Figlet is not already installed, run:
+**4. Start the server**
 
-npm install figlet
-
-4. Start the Server
-
-Run:
-
+```bash
 node server.js
+```
 
-5. Open the Game
+**5. Open the application**
 
-Open your browser and go to:
+Visit the following URL in your browser:
 
 http://localhost:8000
 
+## 🎮 How to Play
 
-I completed the challenge: 5
-I feel good about my code: 4
+1. Open the Coin Toss Game.
+2. Select Heads or Tails.
+3. Submit your guess.
+4. The server randomly generates a coin toss.
+5. See whether you won or lost.
+6. Play again!
+
+
 
 
